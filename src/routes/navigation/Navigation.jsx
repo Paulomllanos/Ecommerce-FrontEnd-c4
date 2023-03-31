@@ -13,11 +13,20 @@ const Navigation = () => {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
+                    <Nav.Link as={NavLink} to="/checkout">Checkout</Nav.Link>
+                    <NavDropdown title={"user"}>
+                        <NavDropdown.Item as={NavLink} to="/user/profile">My Profile</NavDropdown.Item>
+                        <NavDropdown.Item as={NavLink} to="/user/options">Options</NavDropdown.Item>
+                </NavDropdown>
                 </Nav>
+                <Nav>
+                    <Nav.Link className="me-3" as={NavLink} to="/auth">Login</Nav.Link>
+                </Nav>      
             </Navbar.Collapse>
         </Navbar>
     </>
   )
 }
+
 
 export default Navigation
