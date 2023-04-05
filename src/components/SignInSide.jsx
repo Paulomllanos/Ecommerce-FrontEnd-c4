@@ -1,23 +1,30 @@
 
-import { useState } from "react";
 
-import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography, createTheme, ThemeProvider } from "@mui/material"
+import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography, createTheme, ThemeProvider } from "@mui/material";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../context/user/UserContext";
+import {useNavigate} from "react-router-dom"
 
 
 const theme = createTheme();
 
 export default function SignInSide() {
 
+    const navigate = useNavigate();
 
-    const { loginUser } = useContext(UserContext)
+    const [signUp, setSignUp] = useState(false)
+
+
+    const { loginUser, registerUser } = useContext(UserContext)
 
     const initialValues = {
+        name: "",
         email: "",
         password: ""
     }
+
+    console.log(`Este es el estado de signUp: ${signUp}`)
 
     const [user, setUser] = useState(initialValues)
 
@@ -32,9 +39,22 @@ export default function SignInSide() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(signUp){
+      registerUser(user)
+    } else {
+      loginUser(user)
+    }
+
+    setUser(initialValues)
+
+    navigate("/")
     
-    loginUser(user)
   };
+
+  const changeMode = () => {
+    setSignUp(!signUp)
+    setUser(initialValues)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,9 +88,24 @@ export default function SignInSide() {
              
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              { signUp ?  "Sign up" : "Sign in"}
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              {signUp && (
+                <TextField
+                  margin="normal"
+                  required
+                  id="name"
+                  fullWidth
+                  autoFocus
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="John Wick"
+                  name="name"
+                  label="Name"
+                  value={user.name}
+                />
+              )}
               <TextField
                 margin="normal"
                 required
@@ -101,12 +136,12 @@ export default function SignInSide() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {signUp ? "Sign Up" : "Sign In"}
               </Button>
               <Grid container>
                 <Grid item>
-                  <Button>
-                    {"Don't have an account? Sign Up"}
+                  <Button onClick={changeMode}>
+                    {signUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
                   </Button>
                 </Grid>
               </Grid>

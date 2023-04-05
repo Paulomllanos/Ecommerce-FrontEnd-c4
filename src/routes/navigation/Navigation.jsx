@@ -1,8 +1,15 @@
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../../context/user/UserContext";
 
 
 const Navigation = () => {
+
+    const { infoUser, signOut, authStatus} = useContext(UserContext)
+
+
+   const {name} = infoUser
   return (
     <>
         <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
@@ -14,13 +21,15 @@ const Navigation = () => {
                 <Nav className="me-auto">
                     <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
                     <Nav.Link as={NavLink} to="/checkout">Checkout</Nav.Link>
-                    <NavDropdown title={"user"}>
-                        <NavDropdown.Item as={NavLink} to="/user/profile">My Profile</NavDropdown.Item>
-                        <NavDropdown.Item as={NavLink} to="/user/options">Options</NavDropdown.Item>
-                </NavDropdown>
+                    { authStatus && 
+                        <NavDropdown title={name}>
+                            <NavDropdown.Item as={NavLink} to="/user/profile">My Profile</NavDropdown.Item>
+                            <NavDropdown.Item as={NavLink} to="/user/options">Options</NavDropdown.Item>
+                        </NavDropdown>
+                    }
                 </Nav>
                 <Nav>
-                    <Nav.Link className="me-3" as={NavLink} to="/auth">Login</Nav.Link>
+                    {authStatus ? <Button onClick={signOut} className="me-3">Logout</Button> : <Nav.Link className="me-3" as={NavLink} to="/auth">Login</Nav.Link>}
                 </Nav>      
             </Navbar.Collapse>
         </Navbar>
