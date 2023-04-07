@@ -78,6 +78,7 @@ const UserProvider = ({children}) => {
 
     const userEdit = async(data) => {
         const updateUser = await axiosClient.put("/user/myProfile", data)
+        console.log(updateUser)
     }
 
 
@@ -87,7 +88,7 @@ const UserProvider = ({children}) => {
     const msg = "Este mensaje viene desde UserProvider (useContext)"
 
   return (
-    <UserContext.Provider value={{msg, loginUser, registerUser, verifyToken, infoUser: userState.infoUser, authStatus: userState.authStatus, signOut}}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{msg, loginUser, registerUser, verifyToken, infoUser: userState.infoUser, authStatus: userState.authStatus, signOut, userEdit}}>{children}</UserContext.Provider>
   )
 }
 
