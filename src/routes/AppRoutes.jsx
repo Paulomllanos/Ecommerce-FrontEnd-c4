@@ -7,6 +7,7 @@ import { useContext, useEffect } from 'react';
 import UserContext from '../context/user/UserContext';
 import Products from '../pages/products/Products';
 import Product from '../pages/product/Product';
+import Checkout from '../pages/checkout/Checkout';
 
 
 
@@ -35,7 +36,7 @@ const AppRoutes = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/product/:id' element={<Product />} />
-                <Route path='/checkout' element={"Checkout"} />
+                <Route path='/checkout' element={<Checkout />} />
                 {!authStatus && <Route path='/auth' element={<Auth />} />}
                 {authStatus && <Route path='/user/profile' element={<Profile />} />}
                 <Route path='*' element={<Navigate to="/" />} />
