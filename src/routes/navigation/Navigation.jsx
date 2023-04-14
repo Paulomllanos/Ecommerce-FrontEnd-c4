@@ -2,11 +2,15 @@ import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../../context/user/UserContext";
+import CartContext from "../../context/cart/CartContext";
+import CartIcon from "../../components/cartModal/cartIcon/CartIcon";
+import CartDropdown from "../../components/cartModal/cartDropdown/CartDropdown";
 
 
 const Navigation = () => {
 
     const { infoUser, signOut, authStatus} = useContext(UserContext)
+    const { isCartOpen } = useContext(CartContext)
 
 
    const {name} = infoUser
@@ -30,6 +34,9 @@ const Navigation = () => {
                 </Nav>
                 <Nav>
                     {authStatus ? <Button onClick={signOut} className="me-3">Logout</Button> : <Nav.Link className="me-3" as={NavLink} to="/auth">Login</Nav.Link>}
+                    <CartIcon />
+
+                    {isCartOpen && <CartDropdown />}
                 </Nav>      
             </Navbar.Collapse>
         </Navbar>

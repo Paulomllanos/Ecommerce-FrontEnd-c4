@@ -2,17 +2,18 @@ import React from 'react'
 import { useContext } from 'react';
 import CartContext from '../../context/cart/CartContext';
 import "./CheckoutItem.scss"
-const CheckoutItem = ({cartItem}) => {
+const CheckoutItem = ({cartItem, stock}) => {
 
    const {addItemToCart, removeItemToCart, clearItemToCart, cartCount} = useContext(CartContext)
-
-   const {name, price, image, quantity, stock} = cartItem
-
+  
+   console.log(cartCount)
+   console.log(cartItem)
+  
    const clearHandler = () => clearItemToCart(cartItem)
-   const addHandler = () => { if(cartCount < stock) addItemToCart(cartItem)}
+   const addHandler = () => { if( quantity < stock )addItemToCart(cartItem)}
    const removeHandler = () => removeItemToCart(cartItem)
 
-   
+   const {name, price, image, quantity} = cartItem
 
   return (
     <div className="checkout-item-container">

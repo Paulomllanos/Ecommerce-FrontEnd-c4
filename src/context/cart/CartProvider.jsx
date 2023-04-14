@@ -18,8 +18,8 @@ const CartProvider = ({children}) => {
 
     const updateCartItemsReducer = (newCartItems) => {
         // reduce es un metodo de array que sirve para acumular valores
-        const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
-        const newCartTotal = newCartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
+        const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+        const newCartTotal = newCartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0);
 
         dispatch({
             type: "SET_CART_ITEMS",

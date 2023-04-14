@@ -2,17 +2,17 @@ export const addCartItem = (cartItems, productToAdd) => {
     // Busca si cartItems contiene productos
     //! Ojo con el id (solucion ir a tomar el id de productosProvider)
     const existingCartItem = cartItems.find((cartItem) => cartItem._id === productToAdd._id);
-
+    console.log(cartItems)
     // condicional: si ya exite el producto en mi carrito , quiero incrementar su qty en mi carrito
-
+    console.log(cartItems)
     if(existingCartItem){
         return cartItems.map((cartItem) => 
-            cartItem._id === productToAdd._id ? {...cartItem, quantity: cartItem.quantity + 1 }
+            cartItem._id === productToAdd._id ? { ...cartItem, quantity: cartItem.quantity + 1 }
                 : cartItem
             )
     }
     // retorna un nuveo array con cartItems modificados
-    return [...cartItems, {...productToAdd, quantity: 1}]
+    return [...cartItems, { ...productToAdd, quantity: 1 }]
 }
 
 export const removeCartItem = (cartItems, cartItemToRemove) => {

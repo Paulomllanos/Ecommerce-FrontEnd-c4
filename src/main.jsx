@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import UserProvider from './context/user/UserProvider';
 import ProductProvider from './context/product/ProductProvider';
 import CartProvider from './context/cart/CartProvider';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -14,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <UserProvider>
         <ProductProvider>
           <CartProvider>
-            <App />
+              <App />
           </CartProvider>
         </ProductProvider>
       </UserProvider>
